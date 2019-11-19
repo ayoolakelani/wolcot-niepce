@@ -1,0 +1,53 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <a   name="btn" routerLink="/cac/" routerLinkActive="active" class="btn btn-outline-danger float-right"> Apply For Buisness Name</a>
+          <h4 class="card-title"> Registered Businesses</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Request ID
+                </th>
+                <th>
+                  Company Name
+                </th>
+                <th>
+                  No Of Directors
+                </th>
+                <th>
+                  No Of Secretaries
+                </th>
+                <th class="text-right">
+                  Status
+                </th>
+                <th class="text-right">
+                    Update
+                  </th>
+              </thead>
+           <tbody>
+            <tr *ngFor="let request of requests$ | async" >
+               <td class="text-left"> {{request.requestId}}</td>
+               <td class="text-right"> {{request.company.approvedName !== undefined ? request.company.approvedName :  request.company.name1}}</td>
+               <td class="text-center"> {{request.companyinfo.directors !== undefined ? request.companyinfo.directors.length :  'None'}}</td>
+               <td class="text-center"> {{request.companyinfo.secetaries !== undefined ? request.companyinfo.secetaries.length :  'None'}}</td>
+               <td class="text-center"> {{Statuses[request.status]}}</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+           </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+

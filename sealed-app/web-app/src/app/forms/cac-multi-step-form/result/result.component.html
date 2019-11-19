@@ -1,0 +1,223 @@
+<form #companyInfoForm="ngForm" class="editForm" novalidate>
+    <div class="">
+    </div>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <h4 class="head text-center">{{title}}</h4>
+                <h6 class="head text-center">Here is a copy of the information you have entered:</h6>
+               
+                <div class='row d-flex justify-content-around'>
+                    <div class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-10'>
+
+                            <hr />
+                                <blockquote>Personal Details</blockquote>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="name">Name: </label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.personal.firstName + ' ' + formData.personal.lastName}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="email">Email: </label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.personal.email}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="email">Phone: </label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.personal.phone}}
+                                    </div>
+                                </div>
+                                <hr />
+                                <blockquote>Company Details</blockquote>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="work">Company Type: </label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.company.companyType}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="address">Registered Address: </label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.company.registeredAddress}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="address">Head Office Address: </label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.company.headOfficeAddress}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="work">Suggested Name 1</label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.company.name1}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="work">Suggested Name 2</label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.company.name2}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-4  col-md-4'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="work">Suggested Name 3</label>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-8  col-md-8'>
+                                        {{formData.company.name3}}
+                                    </div>
+                                </div>
+                                <hr />
+                                <blockquote>Company Informations Details</blockquote>
+                                <p>Director Details</p>
+
+                                <div *ngFor="let director of formData.companyinfo.directors; let i = index">
+                                    <h6>Director- {{i+1}}</h6>
+                                    <div class="row">
+                                        <div class='col-xs-12 col-sm-4  col-md-4'>
+                                            <div class="form-group">
+                                                <label class="control-label" for="name">Name: </label>
+                                            </div>
+                                        </div>
+                                        <div class='col-xs-12 col-sm-8  col-md-8'>
+                                            {{director.firstName + ' ' + director.lastName}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class='col-xs-12 col-sm-4  col-md-4'>
+                                            <div class="form-group">
+                                                <label class="control-label" for="email">Email: </label>
+                                            </div>
+                                        </div>
+                                        <div class='col-xs-12 col-sm-8  col-md-8'>
+                                            {{director.email}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class='col-xs-12 col-sm-4  col-md-4'>
+                                            <div class="form-group">
+                                                <label class="control-label" for="email">Phone: </label>
+                                            </div>
+                                        </div>
+                                        <div class='col-xs-12 col-sm-8  col-md-8'>
+                                            {{director.phone}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class='col-xs-12 col-sm-4  col-md-4'>
+                                            <div class="form-group">
+                                                <label class="control-label" for="name">ID Information: </label>
+                                            </div>
+                                        </div>
+                                        <div class='col-xs-12 col-sm-8  col-md-8'>
+                                            {{director.IdType + ' - ' + director.IdCardNo}}
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+
+
+                                <div *ngIf="formData.companyinfo.secetaries">
+                                    <p>Secretary Details</p>
+
+                                    <div *ngFor="let director of formData.companyinfo.secetaries; let i = index">
+                                        <h6>Secetrary- {{i+1}}</h6>
+                                        <div class="row">
+                                            <div class='col-xs-12 col-sm-4  col-md-4'>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Name: </label>
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-12 col-sm-8  col-md-8'>
+                                                {{director.firstName + ' ' + director.lastName}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class='col-xs-12 col-sm-4  col-md-4'>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="email">Email: </label>
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-12 col-sm-8  col-md-8'>
+                                                {{director.email}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class='col-xs-12 col-sm-4  col-md-4'>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="email">Phone: </label>
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-12 col-sm-8  col-md-8'>
+                                                {{director.phone}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class='col-xs-12 col-sm-4  col-md-4'>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">ID Information: </label>
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-12 col-sm-8  col-md-8'>
+                                                {{director.IdType + ' - ' + director.IdCardNo}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group text-center space-20">
+                                <button class="btn btn-outline-rounded btn-secondary" (click)="goToPrevious()">
+                                        <span style="margin-right:10px;" class="now-ui-icons arrows-1_minimal-left"></span>
+                                        Previous</button>
+                            <button class="btn btn-success btn-outline-rounded" [disabled]="!isFormValid"
+                                (click)="submit()"> Submit <span style="margin-left:10px;"
+                                    class="now-ui-icons arrows-1_minimal-right"></span></button>
+                        </div>
+                    </div>
+           
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,44 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{ 'LOGIN_TITLE' | translate }}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+<ion-content overflow-scroll="false" no-bounce>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-sm-1 col-md-1 col-0></ion-col>
+        <ion-col col-sm-3 col-md-3 col-12>
+          <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" role="form" class="form">
+            <!-- <img src="../assets/icon/logo.png" /> -->
+            <h2 class="d-flex"><span>Sign Into Your Account</span></h2>
+            <ion-list no-lines>
+              <ion-item>
+                <ion-label>Email</ion-label>
+                <ion-input formControlName="email" type="email" placeholder="user@sealedapp.com"></ion-input>
+              </ion-item>
+              <ion-item class="password">
+                <ion-label>Password</ion-label>
+                <ion-input formControlName="password" type="password" placeholder="******"></ion-input>
+              </ion-item>
+              <p color="light">Forgot you password ? <a>Recover password</a></p>
+              <button [disabled]="loginForm.controls.email.invalid || loginForm.controls.password.invalid" type="submit" ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}
+              </button>
+              <h2 (click)="goToRegister()" text-center>Don't have an account? <span class="text-primary">Create One</span></h2>
+            </ion-list>
+          </form>
+        </ion-col>
+        <ion-col col-sm-1 col-md-1 col-0></ion-col>
+        <ion-col style="height: 100vh" class="bg-white" col-sm-7 col-0 col-md-7>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+
+
+
+
+

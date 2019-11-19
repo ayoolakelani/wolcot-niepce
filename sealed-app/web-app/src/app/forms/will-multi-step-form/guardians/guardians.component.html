@@ -1,0 +1,98 @@
+<form [formGroup]="form" (ngSubmit)="goToNext()" class="editForm" novalidate>
+        <div class="">
+        </div>
+        <div class="main-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="head text-center">GUARDIAN(S) DETAILS</h5>
+                    <h6 class="head text-center">{{title}}</h6>
+                    <div class="text-center">
+                            <blockquote style="padding: 10px">
+                                    <p class="blockquote blockquote-primary">
+                                            If both of you die leaving children under 18 years of age, name the person you want to serve as Guardian of the minor children,
+                                            and also name an alternate:
+                                    </p>
+               
+                           </blockquote>
+
+               
+                         <button class="btn btn-info"  type="button"  (click)="isCollapsed = !isCollapsed" data-target="#collapseExample" [attr.aria-expanded]="false" aria-controls="collapseExample">
+                               More Details...
+                              </button>
+                           <div  [ngbCollapse]="!isCollapsed" id="collapseExample" #panel>
+                              <div class="card card-body" style="background-color: thistle">
+                                    A guardian becomes responsible for the child’s physical care, health, education, and welfare until he or she reaches 18 years of age. 
+                                    This includes providing the basic needs such as food, clothing, shelter, health care decisions and education choices. 
+                                    The guardian is not responsible to meet the child's financial needs with his or her own money. 
+                                    Usually, a trustee, who may also be the executor, handles those arrangements with money provided by the estate and dedicated for that purpose.
+                                    A guardian is not paid for his or her services.
+                                    The person you choose as the guardian should have good parenting skills and values similar to your own. 
+                                    You should have complete confidence in the person you nominate, and you should be certain that your nominee
+                                     is willing to accept the responsibility of raising your children should the need actually arise.
+                              </div>
+                            </div>
+                     </div>
+                            <div class='row d-flex justify-content-center'> 
+                                    <div class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-10'>
+               
+                        <div formArrayName="guardians">
+
+                           
+                            <div  *ngFor="let item of guards.controls; let i = index;" [formGroupName]="i">
+
+                                    <div class="row">
+                                            <div class='col-xs-12 col-sm-5'>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Full Name</label>
+                                                    <input class="form-control input-md"  formControlName="name" required
+                                                        id="name" name="name"  type="text" placeholder="Full Name">
+                                                    <div class="alert alert-danger" *ngIf="guards.controls[i].invalid &&  (guards.controls[i].dirty || guards.controls[i].touched)">Full Name is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-12 col-sm-5'>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="lastname">Contact Information</label>
+                                                    <input class="form-control input-md" formControlName="contact"
+                                                        id="contact" name="contact" type="text" placeholder="Contact Information">
+                                              
+                                                </div>
+                                            </div>
+                                            <div class='col-xs-12 col-sm-2'>
+                                                 <div class="form-group">
+                                                        
+                                                    <button class="btn btn-outline-rounded" (click)="removeGuardian(i)">Remove</button>
+                                                    </div>
+                                                </div>
+                                        </div>
+                            </div>
+                           <hr />
+                          
+                          </div>
+                          <div  row d-flex justify-content-flex-end>
+                            <button type="button" class="btn btn-success"   (click)="addGuardian()">Add Guardian</button>  
+                          </div>
+                          
+                            <div class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-10'>
+
+                                    <div class="form-group text-center">
+                                            <button class="btn btn-outline-rounded btn-secondary" (click)="goToPrevious()"> <span
+                                                style="margin-right:10px;" class="now-ui-icons arrows-1_minimal-left"></span>
+                                            Previous</button>
+
+                                            <button class="btn btn-primary btn-outline-rounded"
+                                                [disabled]="form.invalid" type="submit">Next<span
+                                                    style="margin-left:10px;"
+                                                    class="now-ui-icons arrows-1_minimal-right"></span></button>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    

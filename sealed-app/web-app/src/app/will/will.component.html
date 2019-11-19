@@ -1,0 +1,47 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <a   name="btn" routerLink="/will/" [state]="" routerLinkActive="active" class="btn btn-outline-danger float-right">{{ isExist ? 'Manage Will' : 'Create New Will'}}</a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>Name</th>
+                <th>Relationship</th>
+                <th>Benefits</th>
+              </thead>
+           <tbody>
+            <tr *ngFor="let request of requests$ | async" >
+               <td class="text-left"> {{request.name}}</td>
+               <td class="text-left"> {{request.type}}</td>
+               <td class="text-left">
+                  <div class="dynamic-control">
+                                                       
+                      <div *ngFor="let item of request.benefits;">
+                            <div class="row">
+                              <div class='col-xs-12 col-sm-6  col-md-6'>
+                                   {{item.type}}
+                              </div>
+                          
+                              <div class='col-xs-12 col-sm-6  col-md-6'>
+                                  {{ item.description }}
+                              </div>
+                          </div>
+                      </div>
+                   </div>
+              </td> 
+        
+            </tr>
+           </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

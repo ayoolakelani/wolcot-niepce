@@ -1,0 +1,50 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+<ion-content no-padding overflow-scroll="false" no-bounce>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col col-sm-1 col-md-1 col-0></ion-col>
+        <ion-col col-sm-3 col-md-3 col-12>
+          <form class="form" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)" role="form">
+            <h2 class="d-flex"><span>Sign Up for an Account</span></h2>
+            <ion-list no-lines>
+              <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input type="email" placeholder="Enter your email id" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.submitted && registerForm.controls.email.invalid }"></ion-input>
+              </ion-item>
+              
+              <ion-item class="password">
+                <ion-label stacked>Password</ion-label>
+                <ion-input type="password" placeholder="Enter your password (use alphanumeric)"  formControlName="password"></ion-input>
+              </ion-item>
+              
+              <ion-item class="password">
+                <ion-label stacked>Retype Password</ion-label>
+                <ion-input (input)="checkPassword()" type="password" placeholder="Confirm your password" formControlName="rpassword"></ion-input>
+              </ion-item>
+              <p color="invalid-feedback text-danger" *ngIf="passwordMatch == false">Password does not match</p>
+              <br />
+              <button mode="ios" [disabled]="registerForm.controls.email.invalid || registerForm.controls.password.invalid || registerForm.controls.rpassword.invalid || passwordMatch == false" type="submit" ion-button block no-margin>
+                Create Your Account
+              </button>
+            </ion-list>
+          </form>
+        </ion-col>
+        <ion-col col-sm-1 col-md-1 col-0></ion-col>
+        <ion-col style="height: 100vh" class="bg-white" col-sm-7 col-0 col-md-7>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- 
+    <div id="canvas"></div> -->
+  </ion-content> 
+
+
+

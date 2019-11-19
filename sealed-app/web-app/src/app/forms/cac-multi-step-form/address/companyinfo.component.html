@@ -1,0 +1,253 @@
+<form #companyInfoForm="ngForm" class="editForm" novalidate>
+    <div class="">
+    </div>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <h4 class="head text-center">{{title}}</h4>
+                <h6 class="head text-center">You need to provide a minimum of
+                    Directors({{companysettings.directorsCount}}) and
+                    Secretary({{companysettings.secretariesCount ? companysettings.secretariesCount : 0}})</h6>
+
+        
+
+            <div class='row d-flex justify-content-center'>
+                <div class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-10'>
+
+                    <fieldset>
+                           
+                                <legend>Director(s) Details</legend>
+                                <div class="form-group text-center">
+                                        <button name="addDir" id="addDir" (click)="addDirector()" class="btn btn-secondary">Add Another Director</button>
+                                  </div>
+                           
+                        <ng-template ngFor let-director [ngForOf]="companyinfo.directors" let-index="index" let-isLast="last">
+                      
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-6'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="firstname_{{ director.id }}">First Name</label>
+                                            <input class="form-control input-md" #firstname="ngModel" required
+                                                id="firstname_{{ director.id }}" name="firstname_{{ director.id }}" type="text" placeholder="First Name"
+                                                [(ngModel)]="director.firstName">
+                                            <div class="alert alert-danger" [hidden]="firstname.valid || (!firstname.dirty && !firstname.touched)">First Name is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-6'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="lastname_{{ director.id }}">Last Name</label>
+                                            <input class="form-control input-md" #lastname="ngModel" required
+                                                id="lastname_{{ director.id }}" name="lastname_{{ director.id }}" type="text" placeholder="Last Name"
+                                                [(ngModel)]="director.lastName">
+                                            <div class="alert alert-danger" [hidden]="lastname.valid || (!lastname.dirty && !lastname.touched)">Last Name is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                        <div class='col-xs-12 col-sm-6'>
+                                            <div class="form-group">
+                                                <label class="control-label" for="phone_{{ director.id }}">Phone Number</label>
+                                                <input class="form-control input-md" #phone="ngModel" required
+                                                    id="phone_{{ director.id }}" name="phone_{{ director.id }}" type="text" placeholder="Phone Number"
+                                                    [(ngModel)]="director.phone">
+                                                <div class="alert alert-danger" [hidden]="phone.valid || (!phone.dirty && !phone.touched)">PhoneNumber is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                        <div class='col-xs-12 col-sm-6'>
+                                                <div class="form-group">
+        
+                                                        <label class="control-label" for="email_{{ director.id }}">Email</label>
+                                                        <input class="form-control input-md" #email="ngModel" required
+                                                            pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" id="email_{{ director.id }}" name="email_{{ director.id }}" type="text"
+                                                            placeholder="Email" [(ngModel)]="director.email">
+                                                        <div class="alert alert-danger" [hidden]="email.valid || (!email.dirty && !email.touched)" >Email is required and must be
+                                                            valid</div>
+                                                    </div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="row">
+                                        <div class='col-xs-12 col-sm-6'>
+                                            <div class="form-group">
+                                                   <label class="control-label" for="IdType_{{ director.id }}">Means Of Identification</label>
+                                                    <select class="form-control input-md" #IdType="ngModel" required    id="IdType_{{ director.id }}" name="IdType_{{ director.id }}" [(ngModel)]="director.IdType">
+                                                        <option [value]="undefined">-- Please Select --</option>
+                                                        <option [value]="type" *ngFor="let type of categories">{{type}}</option>
+                                                        </select>
+                                                    <div class="alert alert-danger" [hidden]="IdType.valid || (!IdType.dirty && !IdType.touched)">Client Type is
+                                                        required</div>
+                                            </div>
+                                        </div>
+                                        <div class='col-xs-12 col-sm-6'>
+                                            <div class="form-group">
+                                                <label class="control-label" for="IdCardNo_{{ director.id }}">Id Card Type</label>
+                                                <input class="form-control input-md" #IdCardNo="ngModel" required
+                                                    id="IdCardNo_{{ director.id }}" name="IdCardNo_{{ director.id }}" type="text" placeholder="IdCardNo Number"
+                                                    [(ngModel)]="director.IdCardNo">
+                                                <div class="alert alert-danger" [hidden]="IdCardNo.valid || (!IdCardNo.dirty && !IdCardNo.touched)">Id Number is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                      </div>
+
+                                      
+                                           
+                                            <div class="form-group">
+                                                <label class="control-label" for="IdImage_{{ director.id }}">Upload Files</label>
+                                                 <div >
+
+                                                 <input class="form-control input-md" #fileUpload style="position:'unset'; opacity: 1;" type="file" required id="IdImage_{{ director.id }}" name="IdImage_{{ director.id }}" (change)="upload($event, director.id, 1)" accept=".png,.jpg" />
+                                                  <div class="progress">
+                                                    <input class="form-control input-md" id="IdProgress_{{ director.id }}" name="IdProgress_{{ director.id }}" class="progress-bar progress-bar-striped bg-success " role="progressbar" [style.width]="director.percentage+'%'" [attr.aria-valuenow]="director.percentage" aria-valuemin="0" aria-valuemax="100" [value]="director.percentage + '%'" />
+                                                   </div>
+                                                    <span *ngIf="director.files.name != ''" class="form-group info" role="alert">
+                                                        <a [href]="director.files.url">{{director.files.name}}</a>
+                                                    </span>
+                                                </div> 
+                                                 <div class="alert alert-danger"  [hidden]="fileUpload.valid || (!fileUpload.dirty && !fileUpload.touched)">File Upload is
+                                                    required
+                                                </div>  
+                                            </div>
+                                              
+                                        
+                                      
+                                   
+                                       <div class="form-group text-center">
+                                            <button name="removeDir_{{ director.id }}" id="removeDir_{{ director.id }}" (click)="removeDirector(index)" title="Remove Director" class="btn btn-primary">
+                                                <i class="now-ui-icons ui-1_simple-remove"></i> Remove Director Details
+                                            </button>
+                                      </div>
+                        
+                            
+                            </ng-template>
+                         
+                             
+                   </fieldset>
+
+
+                   <fieldset *ngIf="companyinfo.secetaries.length > 0">
+                        <legend>Secretary Details</legend>
+                        
+                        <div class="form-group text-center">
+                                <button name="addSec" id="addSec" (click)="addSecretary()" class="btn btn-secondary">Add Another Secretary</button>
+                          </div>
+                    <ng-template ngFor let-secretary [ngForOf]="companyinfo.secetaries" let-index="index" let-isLast="last">
+                  
+                            <div class="row">
+                                <div class='col-xs-12 col-sm-6'>
+                                    <div class="form-group">
+                                        <label class="control-label" for="firstname_{{ secretary.id }}">First Name</label>
+                                        <input class="form-control input-md" #firstname="ngModel" required
+                                            id="firstname_{{ secretary.id }}" name="firstname_{{ secretary.id }}" type="text" placeholder="First Name"
+                                            [(ngModel)]="secretary.firstName">
+                                        <div class="alert alert-danger" [hidden]="firstname.valid || (!firstname.dirty && !firstname.touched)">First Name is
+                                            required</div>
+                                    </div>
+                                </div>
+                                <div class='col-xs-12 col-sm-6'>
+                                    <div class="form-group">
+                                        <label class="control-label" for="lastname_{{ secretary.id }}">Last Name</label>
+                                        <input class="form-control input-md" #lastname="ngModel" required
+                                            id="lastname_{{ secretary.id }}" name="lastname_{{ secretary.id }}" type="text" placeholder="Last Name"
+                                            [(ngModel)]="secretary.lastName">
+                                        <div class="alert alert-danger" [hidden]="lastname.valid || (!lastname.dirty && !lastname.touched)">Last Name is
+                                            required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                    <div class='col-xs-12 col-sm-6'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="phone_{{ secretary.id }}">Phone Number</label>
+                                            <input class="form-control input-md" #phone="ngModel" required
+                                                id="phone_{{ secretary.id }}" name="phone_{{ secretary.id }}" type="text" placeholder="Phone Number"
+                                                [(ngModel)]="secretary.phone">
+                                            <div class="alert alert-danger" [hidden]="phone.valid || (!phone.dirty && !phone.touched)">PhoneNumber is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-6'>
+                                            <div class="form-group">
+    
+                                                    <label class="control-label" for="email_{{ secretary.id }}">Email</label>
+                                                    <input class="form-control input-md" #email="ngModel" required
+                                                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" id="email_{{ secretary.id }}" name="email_{{ secretary.id }}" type="text"
+                                                        placeholder="Email" [(ngModel)]="secretary.email">
+                                                    <div class="alert alert-danger" [hidden]="email.valid || (!email.dirty && !email.touched)" >Email is required and must be
+                                                        valid</div>
+                                                </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class='col-xs-12 col-sm-6'>
+                                        <div class="form-group">
+                                               <label class="control-label" for="IdType_{{ secretary.id }}">Client Type</label>
+                                                <select class="form-control input-md" #IdType="ngModel" required    id="IdType_{{ secretary.id }}" name="IdType_{{ secretary.id }}" [(ngModel)]="secretary.IdType">
+                                                    <option [value]="undefined">-- Please Select --</option>
+                                                    <option [value]="type" *ngFor="let type of categories">{{type}}</option>
+                                                    </select>
+                                                <div class="alert alert-danger" [hidden]="IdType.valid || (!IdType.dirty && !IdType.touched)">Client Type is
+                                                    required</div>
+                                        </div>
+                                    </div>
+                                    <div class='col-xs-12 col-sm-6'>
+                                        <div class="form-group">
+                                            <label class="control-label" for="IdCardNo_{{ secretary.id }}">Id Card Type</label>
+                                            <input class="form-control input-md" #IdCardNo="ngModel" required
+                                                id="IdCardNo_{{ secretary.id }}" name="IdCardNo_{{ secretary.id }}" type="text" placeholder="IdCardNo Number"
+                                                [(ngModel)]="secretary.IdCardNo">
+                                            <div class="alert alert-danger" [hidden]="IdCardNo.valid || (!IdCardNo.dirty && !IdCardNo.touched)">Id Number is
+                                                required</div>
+                                        </div>
+                                    </div>
+                          
+                                </div>
+                                <div class="form-group">
+                                        <label class="control-label" for="IdImage_{{ secretary.id }}">Upload Files</label>
+                                         <div >
+
+                                         <input class="form-control input-md"  #fileUpload style="position:'unset'; opacity: 1;" type="file" required  id="IdImage_{{ secretary.id }}" name="IdImage_{{ secretary.id }}" (change)="upload($event, secretary.id, 2)" accept=".png,.jpg,.pdf" />
+                                          <div class="progress">
+                                            <input class="form-control input-md" id="IdProgress_{{ secretary.id }}" name="IdProgress_{{ secretary.id }}" class="progress-bar progress-bar-striped bg-success " role="progressbar" [style.width]="secretary.percentage+'%'" [attr.aria-valuenow]="secretary.percentage" aria-valuemin="0" aria-valuemax="100" [value]="secretary.percentage + '%'" />
+                                           </div>
+                                            <span *ngIf="secretary.files.name != ''" class="form-group info">
+                                                <a [href]="secretary.files.url">{{secretary.files.name}}</a>
+                                            </span>
+                                        </div> 
+                                         <div class="alert alert-danger"  [hidden]="fileUpload.valid || (!fileUpload.dirty && !fileUpload.touched)">File Upload is
+                                            required
+                                        </div>  
+                                    </div>
+
+                                  <div class="form-group text-center">
+                                        <button name="removeSec_{{ secretary.id }}" id="removeSec_{{ secretary.id }}" (click)="removeSecretary(index)" title="Remove secretary" class="btn btn-primary">
+                                            <i class="now-ui-icons ui-1_simple-remove"></i> Remove Secretary Details
+                                        </button>
+                                </div>
+                    
+                   
+                        </ng-template>
+                     
+               </fieldset>
+                        <div class="form-group text-center space-20">
+                        <button class="btn btn-outline-rounded btn-secondary" (click)="goToPrevious(companyInfoForm)">
+                            <span style="margin-right:10px;" class="now-ui-icons arrows-1_minimal-left"></span>
+                            Previous</button>
+                        <button class="btn btn-outline-rounded btn-primary" [disabled]="!companyInfoForm.valid || isFileValid()"
+                            (click)="goToNext(companyInfoForm)"> Next <span style="margin-left:10px;"
+                                class="now-ui-icons arrows-1_minimal-right"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

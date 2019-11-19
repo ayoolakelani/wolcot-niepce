@@ -1,0 +1,181 @@
+<form [formGroup]="form" (ngSubmit)="goToNext()" class="editForm" novalidate>
+  <div class="">
+  </div>
+  <div class="main-content">
+    <div class="row">
+      <div class="col-md-12">
+        <h6 class="head text-center">WILL BENEFICIARIES DETAILS</h6>
+        <h6 class="text-center">{{title}}</h6>
+
+        <div class="text-center">
+          <blockquote style="padding:5px !important">
+            <p class="blockquote blockquote-primary">
+              You can make a gift of any item of personal property only to any person (or charity).
+               For example, a car to a friend, car to a specific relative, card collection to a friend. 
+             <button class="btn btn-info" type="button" (click)="isCollapsed = !isCollapsed" data-target="#collapseExample"
+            [attr.aria-expanded]="false" aria-controls="collapseExample">
+            More...
+          </button>
+            </p>
+       
+          </blockquote>
+
+          
+          <div [ngbCollapse]="!isCollapsed" id="collapseExample" #panel>
+            <div class="card card-body" style="background-color: thistle">
+              This section is optional but may be used if you have a specific item or personal property
+               that you wish to leave to someone. Anything not called out here will pass as part of your “residuary estate.”
+            </div>
+          </div>
+        </div>
+        <div class='row d-flex justify-content-center'>
+          <div class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-10'>
+       
+         <div *ngIf="beneficiaries.length < 1">
+            Will you like to Add Other Beneficiaries
+        </div>
+
+            <div formArrayName="beneficiaries">
+
+
+              <div class="dynamic-control" *ngFor="let item of bens.controls; let  x = index;" [formGroupName]="x">
+                    <div class='text-left'>
+                    
+                          <h6> Beneficiary {{x + 1}} :  {{item.get("name").value}} </h6>
+                              <div class="form-group text-right">
+                              <button class="btn btn-outline-rounded" (click)="removeChild(i)">Remove</button>
+                            </div>
+                      
+                     </div>
+                  
+                <div class="row">
+                  <div class='col-xs-12 col-sm-6'>
+                    <div class="form-group">
+                      <label class="control-label" for="name">Full Name</label>
+                      <input class="form-control input-md" formControlName="name" required id="name" name="name"
+                        type="text" placeholder="Full Name">
+                      <div class="alert alert-danger"
+                        *ngIf="item.get('name').invalid &&  (item.get('name').dirty || item.get('name').touched)">
+                        Full Name is
+                        required</div>
+                    </div>
+                    </div>
+                    <div class='col-xs-12 col-sm-6'>
+                    <div class="form-group">
+                        <label class="control-label" for="name">Type</label>
+                        <select class="form-control input-md" formControlName="type" required id="type" name="type"
+                          type="select" placeholder="Full Name">
+                          <option [value]="null">-- Please Select --</option>
+                          <option [value]="type" *ngFor="let type of benTypes">{{type}}</option>
+                        </select>
+                        <div class="alert alert-danger"
+                          *ngIf="item.get('type').invalid &&  (item.get('type').dirty || item.get('type').touched)">
+                          Benefit type is required
+                        </div>
+                      </div>
+                      </div>
+                   </div>
+
+                  <div   class="dynamic-control"  formArrayName="benefits">
+                    <h6>BENEFITS TO {{item.get("name").value || 'BENEFICIARY ' +  (x+1) }}</h6>
+      
+                  
+                    <div  *ngFor="let ben of item.get('benefits').controls; let i = index;" [formGroupName]="i">
+                      
+                      <div class='text-right'>
+                        <button class="btn btn-outline-rounded" (click)="removeGift(x, i)">Remove</button>
+                      </div>
+                
+                      <div class="row">
+                        <div class='col-xs-12 col-sm-6'>
+                          <div class="form-group">
+                            <label class="control-label" for="name">Type</label>
+                            <select class="form-control input-md" formControlName="type" required id="type" name="type"
+                              type="select" placeholder="Full Name">
+                              <option [value]="undefined">-- Please Select --</option>
+                              <option [value]="type" *ngFor="let type of giftTypes">{{type}}</option>
+                            </select>
+                            <div class="alert alert-danger"
+                              *ngIf="ben.get('type').invalid &&  (ben.get('type').dirty || ben.get('type').touched)">
+                              Benefit type is required
+                            </div>
+                          </div>
+                        </div>
+      
+                     
+
+                        <div class='col-xs-12 col-sm-6' [ngSwitch]="ben.get('type').value">
+                            <div class="form-group" *ngSwitchCase="'CASH'">
+                                <label class="control-label" for="name">Amount</label>
+                                <input class="form-control input-md" formControlName="description" required id="name" name="name"
+                                  type="number" placeholder="0.00">
+                                <div class="alert alert-danger"
+                                  *ngIf="ben.get('description').invalid &&  (ben.get('description').dirty || ben.get('description').touched)">
+                                  Amount is Required</div>
+                            </div>
+                            <div class="form-group" *ngSwitchCase="'ASSET'">
+                                <label class="control-label" for="name">Address</label>
+                                <input class="form-control input-md" formControlName="description" required id="name" name="name"
+                                  type="text" placeholder="Address Of Asset">
+                                <div class="alert alert-danger"
+                                  *ngIf="ben.get('description').invalid &&  (ben.get('description').dirty || ben.get('description').touched)">
+                                  Address is Required</div>
+                            </div>
+                            <div class="form-group" *ngSwitchDefault>
+                                <label class="control-label" for="name">Description</label>
+                                <input class="form-control input-md" formControlName="description" required id="name" name="name"
+                                  type="text" placeholder="Description of Gift">
+                                <div class="alert alert-danger"
+                                  *ngIf="ben.get('description').invalid &&  (ben.get('description').dirty || ben.get('description').touched)">
+                                  Description is Required</div>
+                            </div>
+                          
+                          </div>
+                      </div>
+                      <hr/>
+                    
+                    </div>
+               
+      
+                  <div class="text-right">
+                    <button type="button" class="btn btn-success" (click)="addGift(x, i)">Add Gift</button>
+                  </div>
+              
+                  </div>
+            
+                  <div class='col-xs-12 col-sm-12'>
+                      <div class="form-group">
+                        <label class="control-label" for="lastname">Explain It (If complex)</label>
+                        <textarea class="dynamic-control form-control input-md" formControlName="description" id="description" name="description"
+                          placeholder="Explain It in Your Own Words">
+                          </textarea>
+                       </div>
+                    </div>
+    
+            </div>
+        
+
+          </div>
+          <div row d-flex justify-content-flex-end>
+            <button type="button" class="btn btn-success" (click)="addBen()">Add Beneficiary</button>
+          </div>
+
+        
+            <div class="form-group text-center">
+              <button class="btn btn-outline-rounded btn-secondary" (click)="goToPrevious(workForm)"> <span
+                  style="margin-right:10px;" class="now-ui-icons arrows-1_minimal-left"></span>
+                Previous</button>
+
+              <button class="btn btn-primary btn-outline-rounded" [disabled]="form.invalid" type="submit">Next<span
+                  style="margin-left:10px;" class="now-ui-icons arrows-1_minimal-right"></span></button>
+       
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  
+</form>
+

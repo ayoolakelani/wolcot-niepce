@@ -1,0 +1,101 @@
+<form #workForm="ngForm" class="editForm" novalidate>
+    <div class="">
+    </div>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <h4 class="head text-center">{{title}}</h4>
+
+
+                <div class='row d-flex justify-content-center'>
+                    <div class='col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-10'>
+                      
+
+                            <div class="form-group">
+                                <label class="control-label" for="companyType">Company Type</label>
+                                <select class="form-control input-md" #companyType="ngModel" required id="companyType"
+                                    name="companyType" [(ngModel)]="company.companyType">
+                                    <option [value]="undefined">-- Please Select --</option>
+                                    <option [value]="type" *ngFor="let type of categories">{{type}}</option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    [hidden]="companyType.valid || (!companyType.dirty && !companyType.touched)">
+                                    Company Type is
+                                    required</div>
+                            </div>
+                     
+
+          
+                                    <div class="form-group">
+                                        <label class="control-label" for="registeredAddress">Registered Address</label>
+                                        <input class="form-control input-md" #registeredAddress="ngModel" required
+                                            id="registeredAddress" name="registeredAddress" type="text"
+                                            placeholder="Regitered Address" [(ngModel)]="company.registeredAddress">
+                                        <div class="alert alert-danger"
+                                            [hidden]="registeredAddress.valid || (!registeredAddress.dirty && !registeredAddress.touched)">
+                                            Registered Address is
+                                            required</div>
+                                    </div>
+                            
+                                    <div class="form-group">
+                                        <label class="control-label" for="headOfficeAddress">Head Office Address</label>
+                                        <input class="form-control input-md" #headOfficeAddress="ngModel" required
+                                            id="headOfficeAddress" name="headOfficeAddress" type="text"
+                                            placeholder="Head Office Address" [(ngModel)]="company.headOfficeAddress">
+                                        <div class="alert alert-danger"
+                                            [hidden]="headOfficeAddress.valid || (!headOfficeAddress.dirty && !headOfficeAddress.touched)">
+                                            Head Office is
+                                            required</div>
+                                    </div>
+                               
+                          
+
+                      
+
+                            <div class="form-group">
+                                <label class="control-label" for="name1">Suggessted Company Name 1</label>
+                                <input class="form-control input-md" #name1="ngModel" required id="name1" name="name1"
+                                    type="text" placeholder="Company Name 1" [(ngModel)]="company.name1">
+                                <div class="alert alert-danger"
+                                    [hidden]="name1.valid || (!name1.dirty && !name1.touched)">
+                                    Name is required</div>
+                            </div>
+  
+                            <div class="form-group">
+                                <label class="control-label" for="name2">Suggested Company Name 2</label>
+                                <input class="form-control input-md" #name2="ngModel" required id="name2" name="name2"
+                                    type="text" placeholder="Company Name 2" [(ngModel)]="company.name2">
+                                <div class="alert alert-danger"
+                                    [hidden]="name2.valid || (!name2.dirty && !name2.touched)">
+                                    Name is required</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="name3">Suggested Company Name 3</label>
+                                <input class="form-control input-md" #name3="ngModel" required id="name3" name="name3"
+                                    type="text" placeholder="Company Name 3" [(ngModel)]="company.name3">
+                                <div class="alert alert-danger"
+                                    [hidden]="name3.valid || (!name3.dirty && !name3.touched)">
+                                    Name is required</div>
+                            </div>
+
+                   
+
+
+                        <div class="form-group text-center space-20">
+                            <button class="btn btn-outline-rounded btn-secondary" (click)="goToPrevious(workForm)"> <span
+                                    style="margin-right:10px;" class="now-ui-icons arrows-1_minimal-left"></span>
+                                Previous</button>
+                            <button class="btn btn-outline-rounded btn-primary" [disabled]="!workForm.valid"
+                                (click)="goToNext(workForm)"> Next <span style="margin-left:10px;"
+                                    class="now-ui-icons arrows-1_minimal-right"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

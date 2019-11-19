@@ -1,0 +1,8 @@
+{
+  "name": "sealed-mobile",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

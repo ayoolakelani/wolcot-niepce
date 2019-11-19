@@ -1,0 +1,107 @@
+<div class="full-page signup-page section-image">
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="content">
+        <div class="container">
+         
+                <form #registerForm="ngForm" class="form" method="" action="">
+              
+                        <div class="col-md-4 ml-auto mr-auto">
+                    
+                                <div class="card card-signup card-plain">
+                                        <div class="card-header ">
+                                                <div class="logo-container">
+                                                    <img src="../../assets/img/sealed-logo.png" alt="">
+                                                </div>
+                                            </div>
+                                          
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">Register</h4>
+                                    <div class="social text-center">
+                                        <button class="btn btn-icon btn-round btn-google" (click)="googlelogin()">
+                                               <i class="fab fa-google-plus-square"></i>
+                                        </button>
+                                        <button class="btn btn-icon btn-round btn-twitter">
+                                            <i class="fab fa-twitter-square"></i>
+                                        </button>
+                                        <button class="btn btn-icon btn-round btn-facebook">
+                                            <i class="fab fa-facebook-square"> </i>
+                                        </button>
+                                        <h5 class="card-description"> or be classical </h5>
+                                    </div>
+                    
+                                
+                                        
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
+                                          </div>
+                                          <input type="text" name="firstname" required class="form-control"  #firstname="ngModel" placeholder="First Name..." [(ngModel)]="firstName">
+                                          <div class="alert" [hidden]="firstname.valid || (!firstname.dirty && !firstname.touched)">First Name is
+                                              required</div>
+                                      </div>
+                                
+                                        <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                                          </div>
+                                          <input type="text" name="lastname" required class="form-control"  #lastname="ngModel" placeholder="Last Name..." [(ngModel)]="lastName">
+                                          <div class="alert" [hidden]="lastname.valid || (!lastname.dirty && !lastname.touched)">Last Name is
+                                              required</div>
+                                        </div>
+                                        <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                  <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
+                                                </div>
+                                                <input type="text" required class="form-control" placeholder="Your Email..." #email2="ngModel" 
+                                                pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" id="email" name="email" [(ngModel)]="emailaddress">
+                                                      <div class="alert" [hidden]="email2.valid || (!email2.dirty && !email2.touched)" >Email is required and must be
+                                                valid
+                                              </div>
+                                            </div>
+                                 
+                                            <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                              <i class="now-ui-icons text_caps-small"></i>
+                                                        </span>
+                                                    </div>
+                                                        <input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$" required name="password" class="form-control" placeholder="Enter Password" #password2="ngModel"  [(ngModel)]="Password">
+                                                        <div class="alert" [hidden]="password2.valid || (!password2.dirty && !password2.touched)" > Password must be at least 8 characters, no more than 15 characters, and must include at least one upper case letter, one lower case letter, and one numeric digit
+                                                              </div>
+                                                </div>
+                                     
+                                                <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i>
+                                                            </span>
+                                                        </div>
+                                                            <input type="password" name="repassword" class="form-control"  required #repassword2="ngModel" placeholder="Confirm Password" [(ngModel)]="RePassword">
+                                                            <div class="alert " *ngIf="checkpasswords() === false &&  (repassword2.dirty ||repassword2.touched)" >Passwords Do Not Match
+                                                                    
+                                                                  </div>
+                                                    </div>
+                                        <!-- If you want to add a checkbox to this form, uncomment this code -->
+                    
+                                                        <div class="">
+                                                          <label class="form-check-label">
+                                                              <input required class="form-check-input"  style="background-color: white" type="checkbox">
+                                                              <span class="form-check-sign"></span>
+                                                              I agree to the terms and <a href="#something">conditions</a>.
+                                                          </label>
+                                                      </div>
+                    
+                                        <div class="card-footer text-center">
+                                            <button class="btn btn-primary btn-round btn-lg"  [disabled]="!registerForm.valid" (click)="SignUp()">Get Started</button>
+                                        </div>
+                               
+                                </div>
+                            </div>
+                        </div>
+                   
+    </form>
+                </div>
+
+ </div>
+        
+     
+    </div>
