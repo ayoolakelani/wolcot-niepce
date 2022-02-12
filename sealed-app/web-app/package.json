@@ -26,7 +26,7 @@
     "@angular/router": "8.2.2",
     "@firebase/firestore": "^1.4.10",
     "@ng-bootstrap/ng-bootstrap": "4.0.2",
-    "ajv": "6.7.0",
+    "ajv": "6.12.3",
     "ajv-keywords": "3.3.0",
     "angularfire2": "^5.2.1",
     "bootstrap": "4.2.1",
